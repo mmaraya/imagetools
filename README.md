@@ -1,7 +1,7 @@
 Image Tools 
 ===========
 
-This repository contains a collection of custom image manipulation utilities written in C++ and Python.
+This repository contains a collection of custom image manipulation utilities written in Python.
 
 exifrename.py
 -------------
@@ -11,7 +11,7 @@ This utility will rename the supplied JPEG file to the date and time the image w
 Supported Platforms
 -------------------
 
-These utilities run under Linux, Mac OS X, and Windows. 
+These utilities run under all platforms supported by Python.
 
 License
 -------
