@@ -3,6 +3,11 @@ Image Tools
 
 This repository contains a collection of custom image manipulation utilities written in C++ and Python.
 
+exifrename.py
+-------------
+
+This utility will rename the supplied JPEG file to the date and time the image was taken in YYYYMMDDHHMMSS.jpg format.
+
 Supported Platforms
 -------------------
 
