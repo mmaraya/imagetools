@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-"""exifrename.py: Rename a JPEG to the date and time the image was taken in YYYYMMDDHHMMSS.jpg format"""
+"""exifrename.py: Rename a JPEG to the date and time the image was taken in YYYYMMDDHHMMSSxx.jpg format"""
 
 __author__ = 'Mike Maraya'
 __copyright__ = 'Copyright (c) 2014, Mike Maraya'
@@ -10,14 +10,13 @@ __email__ = 'mike.maraya@gmail.com'
 __status__ = 'Development'
 __maintainer__ = 'Mike Maraya'
 
-import exifread, glob, sys
+import exifread, glob, sys, time
 
 for pattern in (sys.argv[1:]):
     for filename in glob.glob(pattern):
-        print 'File:', filename
         f = open(filename, 'rb')
-        tags = exifread.process_file(f, details=False, stop_tag='EXIF DateTimeOriginal')
-        date = tags['EXIF DateTimeOriginal']
-        print 'Date %d', date
-
-
+        tags = exifread.process_file(f, details=False)
+        exif_date = tags['EXIF DateTimeOriginal']
+        file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
+        new_filename = time.strftime('%Y%m%d%H%M%S', file_date)
+        print new_filename
