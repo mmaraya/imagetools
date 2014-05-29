@@ -10,13 +10,18 @@ __email__ = 'mike.maraya@gmail.com'
 __status__ = 'Development'
 __maintainer__ = 'Mike Maraya'
 
-import exifread, glob, sys, time
+import exifread, glob, os.path, sys, time
 
 for pattern in (sys.argv[1:]):
     for filename in glob.glob(pattern):
         f = open(filename, 'rb')
+        dir = os.path.dirname(filename) + os.sep
         tags = exifread.process_file(f, details=False)
         exif_date = tags['EXIF DateTimeOriginal']
         file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
-        new_filename = time.strftime('%Y%m%d%H%M%S', file_date)
+        counter = 1
+        new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(2) + '.jpg'
+        while os.path.isfile(new_filename):
+            counter += 1
+            new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(2) + '.jpg'
         print new_filename
