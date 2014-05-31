@@ -15,7 +15,7 @@ import exifread, glob, os.path, sys, time
 for pattern in (sys.argv[1:]):
     for old_filename in glob.glob(pattern):
         f = open(old_filename, 'rb')
-        dir = os.path.dirname(old_filename) + os.sep
+        dir = os.path.dirname(os.path.abspath(old_filename)) + os.sep
         tags = exifread.process_file(f, details=False)
         exif_date = tags['EXIF DateTimeOriginal']
         file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
@@ -24,6 +24,6 @@ for pattern in (sys.argv[1:]):
         while os.path.isfile(new_filename):
             counter += 1
             new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(2) + '.jpg'
-        os.rename(old_filename, new_filename)
+        os.rename(os.path.abspath(old_filename), os.path.abspath(new_filename))
+        print 'Renamed %s to %s' % (old_filename, new_filename)
         f.close()
-        print 'Renamed %s with %s' % (old_filename, new_filename)
