@@ -20,10 +20,10 @@ for pattern in (sys.argv[1:]):
         exif_date = tags['EXIF DateTimeOriginal']
         file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
         counter = 0
-        new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(2) + '.jpg'
+        new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
         while os.path.isfile(new_filename):
             counter += 1
-            new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(2) + '.jpg'
+            new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
         os.rename(os.path.abspath(old_filename), os.path.abspath(new_filename))
         print 'Renamed %s to %s' % (old_filename, new_filename)
         f.close()
