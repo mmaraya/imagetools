@@ -20,6 +20,9 @@ for pattern in (sys.argv[1:]):
         exif_date = tags['EXIF DateTimeOriginal']
         file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
         counter = 0
+        if tags.has_key('EXIF SubSecTime'):
+            sub_sec = tags['EXIF SubSecTime']
+            counter = int(str(sub_sec))
         new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
         while os.path.isfile(new_filename):
             counter += 1
