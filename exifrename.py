@@ -10,13 +10,18 @@ __email__ = 'mike.maraya@gmail.com'
 __status__ = 'Development'
 __maintainer__ = 'Mike Maraya'
 
-import exifread, glob, os.path, sys, time
+import glob
+import os.path
+import sys
+import time
+
+import exifread
 
 for pattern in (sys.argv[1:]):
     for old_filename in glob.glob(pattern):
         f = open(old_filename, 'rb')
-        # get EXIF date or use file date
         tags = exifread.process_file(f, details=False)
+        # get EXIF date or use file date
         exif_date = '1900:01:01 00:00:00'
         if tags.has_key('EXIF DateTimeOriginal'):
             exif_date = tags['EXIF DateTimeOriginal']
