@@ -17,12 +17,14 @@ for pattern in (sys.argv[1:]):
         f = open(old_filename, 'rb')
         dir = os.path.dirname(os.path.abspath(old_filename)) + os.sep
         tags = exifread.process_file(f, details=False)
-        exif_date = tags['EXIF DateTimeOriginal']
+        if tags.has_key('EXIF DateTimeOriginal'):
+            exif_date = tags['EXIF DateTimeOriginal']
         file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
-        counter = 0
         if tags.has_key('EXIF SubSecTime'):
             sub_sec = tags['EXIF SubSecTime']
             counter = int(str(sub_sec))
+        else:
+            counter = 0
         new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
         while os.path.isfile(new_filename):
             counter += 1
