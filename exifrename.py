@@ -17,10 +17,11 @@ import time
 
 import exifread
 
+
 for pattern in (sys.argv[1:]):
-    for old_filename in glob.glob(pattern):
-        f = open(old_filename, 'rb')
-        tags = exifread.process_file(f, details=False)
+    for filename in glob.glob(pattern):
+        file = open(filename, 'rb')
+        tags = exifread.process_file(file, details=False)
         # get EXIF date or use file date
         exif_date = '1900:01:01 00:00:00'
         if tags.has_key('EXIF DateTimeOriginal'):
@@ -31,11 +32,11 @@ for pattern in (sys.argv[1:]):
         if tags.has_key('EXIF SubSecTime'):
             counter = int(str(tags['EXIF SubSecTime']))
         # rename file
-        dir = os.path.dirname(os.path.abspath(old_filename)) + os.sep
+        dir = os.path.dirname(os.path.abspath(filename)) + os.sep
         new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
         while os.path.isfile(new_filename):
             counter += 1
             new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
-        os.rename(os.path.abspath(old_filename), os.path.abspath(new_filename))
-        print 'Renamed %s to %s' % (old_filename, new_filename)
-        f.close()
+        os.rename(os.path.abspath(filename), os.path.abspath(new_filename))
+        print 'Renamed %s to %s' % (filename, new_filename)
+        file.close()
