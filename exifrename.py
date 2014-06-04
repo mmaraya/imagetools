@@ -23,10 +23,10 @@ for pattern in (sys.argv[1:]):
         file = open(filename, 'rb')
         tags = exifread.process_file(file, details=False)
         # get EXIF date or use file date
-        exif_date = '1900:01:01 00:00:00'
+        file_date = time.localtime(os.path.getmtime(filename))
         if tags.has_key('EXIF DateTimeOriginal'):
             exif_date = tags['EXIF DateTimeOriginal']
-        file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
+            file_date = time.strptime(str(exif_date), "%Y:%m:%d %H:%M:%S")
         # get EXIF sub-second time or use 000
         counter = 0
         if tags.has_key('EXIF SubSecTime'):
