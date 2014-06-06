@@ -38,6 +38,10 @@ for pattern in (sys.argv[1:]):
         while os.path.isfile(new_filename):
             counter += 1
             new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
-        os.rename(os.path.abspath(filename), os.path.abspath(new_filename))
-        print 'Renamed %s to %s' % (filename, new_filename)
+        # rename the file
+        try:
+            os.rename(os.path.abspath(filename), os.path.abspath(new_filename))
+            print 'Renamed %s to %s' % (filename, new_filename)
+        except OSError:
+            print 'Could not rename %s to %s' % (os.path.abspath(filename), os.path.abspath(new_filename))
         file.close()
