@@ -18,7 +18,6 @@ import time
 import exifread
 
 
-new_dir = sys.argv[2:]
 for pattern in (sys.argv[1:]):
     for filename in glob.glob(pattern):
         file = open(filename, 'rb')
@@ -33,12 +32,12 @@ for pattern in (sys.argv[1:]):
         if tags.has_key('EXIF SubSecTime'):
             counter = int(str(tags['EXIF SubSecTime']))
         # rename file
-        dir = os.path.dirname(os.path.abspath(filename)) + os.sep
-        new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
+        new_dir = os.path.dirname(os.path.abspath(filename))
+        new_filename = new_dir + os.sep + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
         # increase millisecond counter if filename already exists
         while os.path.isfile(new_filename):
             counter += 1
-            new_filename = dir + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
+            new_filename = new_dir + os.sep + time.strftime('%Y%m%d%H%M%S', file_date) + str(counter).zfill(3) + '.jpg'
         # rename the file
         try:
             os.rename(os.path.abspath(filename), os.path.abspath(new_filename))
