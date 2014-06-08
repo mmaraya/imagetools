@@ -18,6 +18,7 @@ import time
 import exifread
 
 
+new_dir = sys.argv[2:]
 for pattern in (sys.argv[1:]):
     for filename in glob.glob(pattern):
         file = open(filename, 'rb')
