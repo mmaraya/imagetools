@@ -8,6 +8,11 @@ exifrename.py
 
 This utility will rename the supplied JPEG file to the date and time the image was taken in YYYYMMDDHHMMSSMSS.jpg format.
 
+resize.py
+-------------
+
+This utility will resize the supplied JPEG file to a size suitable for 8"x10" printing, preserving all EXIF information.
+
 Supported Platforms
 -------------------
 
