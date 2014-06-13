@@ -11,7 +11,9 @@ __status__ = 'Development'
 __maintainer__ = 'Mike Maraya'
 
 import glob
+import os
 import sys
+from stat import *
 
 from PIL import Image
 
@@ -20,6 +22,6 @@ for pattern in (sys.argv[1:]):
     for filename in glob.glob(pattern):
         try:
             im = Image.open(filename)
-            print filename, im.format, "%dx%d" % im.size, im.mode
+            print filename, "%dx%d" % im.size, os.stat(filename)[ST_SIZE]
         except IOError:
             print 'Could not read image properties for %s' % (filename)
