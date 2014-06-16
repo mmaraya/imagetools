@@ -28,9 +28,9 @@ for pattern in (sys.argv[1:]):
         except IOError:
             print 'Could not read image properties for %s' % filename
 
-        if im.size > size:
+        if im.size[0] > size[0] or im.size[1] > size[1]:
             try:
                 im.thumbnail(size, Image.ANTIALIAS)
-                im.save(outfile, 'JPEG')
+                im.save(filename, 'JPEG')
             except IOError:
-                print 'Could not save resized image file %s' % outfile
+                print 'Could not save resized image file %s' % filename
