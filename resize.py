@@ -13,24 +13,33 @@ __maintainer__ = 'Mike Maraya'
 import glob
 import os
 import sys
-from stat import *
 
 from PIL import Image
 
 
-size = 3008, 2000
+# maximum dimensions in pixels
+hsize = 3008
+vsize = 2000
 for pattern in (sys.argv[1:]):
     for filename in glob.glob(pattern):
         outfile = os.path.splitext(filename)[0] + '.resized.jpg'
         try:
             im = Image.open(filename)
-            print filename, '%dx%d' % im.size, os.stat(filename)[ST_SIZE]
         except IOError:
             print 'Could not read image properties for %s' % filename
-
+        # check for image orientation
+        if im.size[0] >= im.size[1]:
+            size = (hsize, vsize)
+        else:
+            size = (vsize, hsize)
+        # check if either horizontal or vertical exceeds our maximum dimensions
+        old_size = im.size
         if im.size[0] > size[0] or im.size[1] > size[1]:
             try:
                 im.thumbnail(size, Image.ANTIALIAS)
                 im.save(filename, 'JPEG')
             except IOError:
                 print 'Could not save resized image file %s' % filename
+            print filename, ' resized from %dx%d' % old_size, ' to %dx%d' % im.size
+        else:
+            print filename, ' is %dx%d' % im.size, ' not resized'
