@@ -17,6 +17,7 @@ import sys
 from PIL import Image
 
 
+
 # maximum dimensions in pixels
 hsize = 3008
 vsize = 2000
@@ -32,12 +33,14 @@ for pattern in (sys.argv[1:]):
             size = (hsize, vsize)
         else:
             size = (vsize, hsize)
-        # check if either horizontal or vertical exceeds our maximum dimensions
+        # save information about the image before we change it
         old_size = im.size
+        exif = im.info['exif']
+        # resize if either horizontal or vertical exceeds our maximum dimensions
         if im.size[0] > size[0] or im.size[1] > size[1]:
             try:
                 im.thumbnail(size, Image.ANTIALIAS)
-                im.save(filename, 'JPEG')
+                im.save(filename, 'JPEG', exif=exif)
             except IOError:
                 print 'Could not save resized image file %s' % filename
             print filename, ' resized from %dx%d' % old_size, ' to %dx%d' % im.size
