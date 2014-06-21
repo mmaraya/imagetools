@@ -18,6 +18,7 @@ from PIL import Image
 
 
 
+
 # maximum dimensions in pixels
 hsize = 3008
 vsize = 2000
@@ -27,7 +28,7 @@ for pattern in (sys.argv[1:]):
         try:
             im = Image.open(filename)
         except IOError:
-            print 'Could not read image properties for %s' % filename
+            print 'Could not read image properties for %s' % (filename)
         # check for image orientation
         if im.size[0] >= im.size[1]:
             size = (hsize, vsize)
@@ -42,7 +43,7 @@ for pattern in (sys.argv[1:]):
                 im.thumbnail(size, Image.ANTIALIAS)
                 im.save(filename, 'JPEG', exif=exif)
             except IOError:
-                print 'Could not save resized image file %s' % filename
-            print filename, ' resized from %dx%d' % old_size, ' to %dx%d' % im.size
+                print 'Could not save resized image file %s' % (filename)
+            print '%s resized from %dx%d to %dx%d' % (filename, old_size[0], old_size[1], im.size[0], im.size[1])
         else:
-            print filename, ' is %dx%d' % im.size, ' not resized'
+            print '%s is %dx%d not resized' % (filename, im.size[0], im.size[1])
