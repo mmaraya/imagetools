@@ -6,12 +6,12 @@ This repository contains a collection of custom image manipulation utilities wri
 exifrename.py
 -------------
 
-This utility will rename the supplied JPEG file to the date and time the image was taken in YYYYMMDDHHMMSSMSS.jpg format.
+This utility will rename JPEG files to the date and time the image was taken in YYYYMMDDHHMMSSMSS.jpg format.  This utility uses the Python Pillow fork of the Python Imaging Library (PIL).
 
 resize.py
 -------------
 
-This utility will resize the supplied JPEG file to a size suitable for 8"x10" printing, preserving all EXIF information.
+This utility will resize the supplied JPEG file to a size suitable for 8"x10" printing, preserving all EXIF information.    This utility uses the Python Pillow fork of the Python Imaging Library (PIL).
 
 Supported Platforms
 -------------------
