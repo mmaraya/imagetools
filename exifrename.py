@@ -28,7 +28,7 @@ for pattern in (sys.argv[1:]):
             exif_date = tags['EXIF DateTimeOriginal']
             file_date = time.strptime(str(exif_date), '%Y:%m:%d %H:%M:%S')
         # get EXIF sub-second time or use 000
-        counter = 0
+        counter = 1
         if tags.has_key('EXIF SubSecTime'):
             counter = int(str(tags['EXIF SubSecTime']))
         # rename file
