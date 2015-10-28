@@ -24,7 +24,6 @@ hsize = 3008
 vsize = 2000
 for pattern in (sys.argv[1:]):
     for filename in glob.glob(pattern):
-        outfile = os.path.splitext(filename)[0] + '.resized.jpg'
         try:
             im = Image.open(filename)
         except IOError:
