@@ -1,4 +1,4 @@
-Image Tools 
+![image tools logo](icon.png "imagetools") Image Tools 
 ===========
 
 This repository contains a collection of custom image manipulation utilities written in Python.
