@@ -27,9 +27,14 @@ for pattern in (sys.argv[1:]):
         has_gps = False
         if tags.has_key('GPS GPSLatitude'):
             has_gps = True
-            latitude = tags['GPS GPSLatitude']
             latitude_ref = tags['GPS GPSLatitudeRef']
-            print('\tlatitude: %s %s' % (latitude, latitude_ref))
+            latitude = tags['GPS GPSLatitude']
+            print(type(latitude)) 
+            print(latitude)
+            #latitude_hour = latitude.getHours()
+            #latitude_min = latitude.Hours()
+            #latitude_sec = latitude.hrs()
+            #print('\tlatitude: %s\u00b0%s\'%s\" %s' % (latitude_hour, latitude_min, latitude_sec, latitude_ref))
         if tags.has_key('GPS GPSLongitude'):
             has_gps = True
             longitude = tags['GPS GPSLongitude'] 
