@@ -18,6 +18,12 @@ Supported Platforms
 
 These utilities run under all platforms supported by Python.
 
+Dependencies
+------------
+
+These tools use [ExifRead](https://pypi.python.org/pypi/ExifRead). The easiest way to install this dependency is to install [PyPi](https://pypi.python.org/pypi) and run ```pip install exifread```
+
+
 License
 -------
 
